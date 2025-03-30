@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Jonas Notepad</title>
+  <link rel="stylesheet" href="node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="node_modules/codemirror/theme/dracula.css">
+  <link rel="stylesheet" href="node_modules/codemirror/addon/dialog/dialog.css">
+  <link rel="stylesheet" href="node_modules/codemirror/addon/fold/foldgutter.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-mode">
+  <div class="container">
+    <div class="title-bar">
+      <div class="title-bar-drag-area">
+        <div class="app-icon">
+          <!-- Jonas Notepad Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#8b67ff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#ff67dd;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <!-- Notepad base -->
+            <path d="M20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#1a1c2a"/>
+            <!-- Notepad shadow/highlight -->
+            <path d="M20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="url(#grad1)" opacity="0.7"/>
+            <!-- Binding rings -->
+            <circle cx="9" cy="8" r="0.8" fill="#e7eaff" opacity="0.8"/>
+            <circle cx="9" cy="11" r="0.8" fill="#e7eaff" opacity="0.8"/>
+            <circle cx="9" cy="14" r="0.8" fill="#e7eaff" opacity="0.8"/>
+            <!-- "J" letter -->
+            <path d="M14.5 5.5V11.5C14.5 12.05 14.05 12.5 13.5 12.5H12.5C11.95 12.5 11.5 12.05 11.5 11.5" stroke="url(#grad1)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- Lower paper stack -->
+            <path d="M4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6Z" fill="#121421"/>
+          </svg>
+        </div>
+        <div class="app-title">Jonas Notepad <span class="version-badge">Dark</span></div>
+      </div>
+      <div class="window-controls">
+        <button id="minimize-btn" class="window-control-btn" title="Minimize">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+            <rect x="1" y="5.5" width="10" height="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <button id="maximize-btn" class="window-control-btn" title="Maximize">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="maximize-icon">
+            <rect x="1.5" y="1.5" width="9" height="9" stroke="currentColor" fill="none" stroke-width="1.25"/>
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" class="restore-icon">
+            <path d="M3.5,3.5 v-2 h7 v7 h-2 M8.5,4.5 h-7 v7 h7 z" stroke="currentColor" fill="none" stroke-width="1.25"/>
+          </svg>
+        </button>
+        <button id="close-btn" class="window-control-btn" title="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+            <path d="M1.5,1.5 L10.5,10.5 M1.5,10.5 L10.5,1.5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-tab-id="tab-1">
+        <span class="tab-name">Untitled</span>
+        <button class="tab-close-btn">×</button>
+      </div>
+      <button class="new-tab-btn" title="New Tab">+</button>
+    </div>
+    
+    <div class="formatting-toolbar">
+      <button id="btn-checklist" title="Checklist (Ctrl+Shift+C)">☑</button>
+      <button id="btn-bullet-list" title="Bullet List (Ctrl+Shift+B)">•</button>
+      <button id="btn-numbered-list" title="Numbered List (Ctrl+Shift+N)">1.</button>
+      <div class="toolbar-divider"></div>
+      <div class="toolbar-info">Format Text</div>
+    </div>
+    
+    <div class="toolbar">
+      <div class="file-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" class="file-icon">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" fill="currentColor" opacity="0.7"/>
+        </svg>
+        <span id="file-path">No file open</span>
+      </div>
+      <div class="stats">
+        <span id="word-count">Words: 0</span>
+        <span id="char-count">Characters: 0</span>
+        <span id="line-count">Lines: 0</span>
+      </div>
+    </div>
+    
+    <div class="editor-container">
+      <textarea id="editor"></textarea>
+    </div>
+    
+    <div class="search-panel hidden">
+      <div class="search-input-group">
+        <input type="text" id="search-input" placeholder="Find...">
+        <button id="find-next">Find</button>
+        <button id="find-prev">↑</button>
+        <button id="close-search">×</button>
+      </div>
+      <div class="replace-input-group hidden">
+        <input type="text" id="replace-input" placeholder="Replace with...">
+        <button id="replace">Replace</button>
+        <button id="replace-all">Replace All</button>
+      </div>
+      <label><input type="checkbox" id="case-sensitive"> Case sensitive</label>
+      <label><input type="checkbox" id="whole-word"> Whole word</label>
+      <label><input type="checkbox" id="regex-search"> Regex</label>
+    </div>
+    
+    <div class="status-bar">
+      <div class="status-left">
+        <span id="cursor-position">Ln: 1, Col: 1</span>
+      </div>
+      <div class="status-right">
+        <span id="file-type">Plain Text</span>
+        <span id="encoding">UTF-8</span>
+      </div>
+    </div>
+  </div>
+  
+  <div id="settings-modal" class="modal">
+    <div class="modal-content">
+      <h2>Jonas Notepad Settings</h2>
+      <div class="settings-section">
+        <h3>Appearance</h3>
+        <!-- Dark mode toggle removed as we're always in dark mode -->
+        <div class="setting">
+          <label for="font-size">Font Size</label>
+          <input type="number" id="font-size" min="10" max="72" value="14">
+        </div>
+        <div class="setting">
+          <label for="font-family">Font Family</label>
+          <select id="font-family">
+            <option value="'Fira Code', monospace">Fira Code</option>
+            <option value="'JetBrains Mono', monospace">JetBrains Mono</option>
+            <option value="Consolas, monospace">Consolas</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="monospace">Monospace</option>
+          </select>
+        </div>
+      </div>
+      <div class="settings-section">
+        <h3>Editor</h3>
+        <div class="setting">
+          <label for="auto-save">Auto Save</label>
+          <input type="checkbox" id="auto-save" checked>
+        </div>
+        <div class="setting">
+          <label for="line-numbers">Line Numbers</label>
+          <input type="checkbox" id="line-numbers" checked>
+        </div>
+        <div class="setting">
+          <label for="tab-size">Tab Size</label>
+          <input type="number" id="tab-size" min="1" max="8" value="2">
+        </div>
+        <div class="setting">
+          <label for="word-wrap">Word Wrap</label>
+          <input type="checkbox" id="word-wrap" checked>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button id="save-settings">Save</button>
+        <button id="cancel-settings">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="node_modules/codemirror/mode/javascript/javascript.js"></script>
+  <script src="node_modules/codemirror/mode/xml/xml.js"></script>
+  <script src="node_modules/codemirror/mode/css/css.js"></script>
+  <script src="node_modules/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+  <script src="node_modules/codemirror/mode/markdown/markdown.js"></script>
+  <script src="node_modules/codemirror/mode/python/python.js"></script>
+  <script src="node_modules/codemirror/addon/search/searchcursor.js"></script>
+  <script src="node_modules/codemirror/addon/search/search.js"></script>
+  <script src="node_modules/codemirror/addon/dialog/dialog.js"></script>
+  <script src="node_modules/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="node_modules/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="node_modules/codemirror/addon/fold/foldcode.js"></script>
+  <script src="node_modules/codemirror/addon/fold/foldgutter.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
