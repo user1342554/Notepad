@@ -127,5 +127,5 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by Jonas</p>
+  <p>Made by Jonas (and ai)</p>
 </div>
