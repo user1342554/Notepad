@@ -3,35 +3,22 @@
 <div align="center">
   <img src="assets/jonas-icon.png" alt="Jonas Notepad Logo" width="120">
   <br>
-  <h3>A beautiful, dark-themed text editor built with Electron</h3>
+  <h3>A dark-themed text editor</h3>
   
-  ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-  ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20MacOS%20%7C%20Linux-lightgrey)
   ![Version](https://img.shields.io/badge/version-1.0.0-brightgreen)
 </div>
 
 ## ✨ Features
 
-- **Elegant Dark Theme** - Carefully crafted dark mode with purple accents and smooth gradients
-- **Smooth Animations** - Subtle animations for tabs, search, and UI elements enhance user experience
-- **Multi-tab Interface** - Work on multiple documents simultaneously with animated tab transitions
-- **Smart Formatting Tools**:
-  - ☑️ Interactive checklists with completion tracking
-  - • Bullet lists with auto-continuation
-  - 1. Numbered lists that auto-increment
-- **Syntax Highlighting** - Built-in support for JavaScript, HTML, CSS, Python, Markdown, and more
-- **Advanced Search & Replace** - With regex support and highlight animations
-- **Auto-Save** - Never lose your work with intelligent background saving
-- **Code-Friendly** - Optimized for developers with monospace fonts and coding features
-- **Sound Feedback** - Subtle audio cues for various actions
-- **Customizable Settings** - Adjust font size, font family, tab size, and more
-
-## 📸 Screenshots
-
-<div align="center">
-  <p>Main Editor View</p>
-  <p><em>Beautiful dark interface with syntax highlighting and formatting tools</em></p>
-</div>
+- **Dark Mode Interface** - Purple accent themed dark mode design
+- **Tab Management** - Basic multi-document editing with tabs
+- **Text Formatting**:
+  - ☑️ Basic checkboxes feature (`Ctrl+Shift+C`)
+  - • Simple bullet lists (`Ctrl+Shift+B`)
+  - 1. Basic numbered lists (`Ctrl+Shift+N`)
+- **Simple Search & Replace** - Find and replace text functionality
+- **Basic Settings** - Adjust font size, font family, and tab size
+- **Visual Design** - Custom-designed dark theme with animations
 
 ## 🚀 Getting Started
 
@@ -60,7 +47,7 @@
 
 ### Building Executable
 
-To create a standalone Windows executable:
+To create a standalone executable:
 
 ```bash
 npm run package
@@ -86,46 +73,21 @@ This will create installation files in the `dist` folder.
 | Numbered list | Ctrl+Shift+N |
 | Checklist | Ctrl+Shift+C |
 
-### Smart Features
+### Basic Features
 
-- **Auto-formatting**: Type `- ` or `* ` and press Space to create a bullet list
-- **List continuation**: Press Enter in a list to continue with the next item
-- **Interactive checkboxes**: Click on checkboxes to mark items as complete
-- **Tab navigation**: Use Ctrl+Tab and Ctrl+Shift+Tab to switch between tabs
+- **List shortcuts**: Type `- ` or `* ` and press Space for a bullet list
+- **Numbered lists**: Type `1.` and press Space
+- **Checkboxes**: Type `[]` and press Space
+- **Tab switching**: Use Ctrl+Tab and Ctrl+Shift+Tab
 
-## 🛠️ Technology Stack
+## 🛠️ Technology
 
-- **Electron** - Cross-platform desktop application framework
-- **CodeMirror** - Feature-rich text editor component
-- **Modern CSS** - Custom styling with CSS variables and transitions
-- **Web Audio API** - For subtle sound effects and notifications
-
-## 🎨 Design Philosophy
-
-Jonas Notepad was designed with three core principles:
-
-1. **Beauty** - A visually pleasing experience that makes writing enjoyable
-2. **Performance** - Fast startup and responsive editing even with large files
-3. **Simplicity** - Intuitive interface that stays out of your way
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/user1342554/Notepad/issues).
-
-## 🌟 Future Enhancements
-
-- Cloud sync capabilities
-- Spell checker
-- Custom themes
-- Plugin system
-- Code snippets library
+- **Electron** - Desktop application framework
+- **CodeMirror** - Text editor component
+- **CSS** - Custom styling
 
 ---
 
 <div align="center">
-  <p>Made by Jonas (and ai)</p>
+  <p>Created by Jonas</p>
 </div>
